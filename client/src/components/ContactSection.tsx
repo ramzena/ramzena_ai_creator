@@ -59,38 +59,40 @@ export default function ContactSection() {
             {/* Contact links */}
             <div className="space-y-4">
               <a
-                href="mailto:hello@aicreator.studio"
+                href="mailto:ramzena@gmail.com"
                 className="flex items-center gap-4 group"
               >
                 <div className="w-10 h-10 border border-[#00f0ff]/20 flex items-center justify-center group-hover:border-[#00f0ff]/50 transition-all duration-500">
                   <Mail size={16} className="text-[#00f0ff]/60 group-hover:text-[#00f0ff]" />
                 </div>
                 <span className="font-[Rajdhani] text-white/40 group-hover:text-white/70 transition-colors">
-                  hello@aicreator.studio
+                  ramzena@gmail.com
                 </span>
               </a>
               <a
-                href="#"
+                href="https://instagram.com/ramzena_ai_creator"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-4 group"
-                onClick={(e) => { e.preventDefault(); toast("Feature coming soon"); }}
               >
                 <div className="w-10 h-10 border border-[#ff00aa]/20 flex items-center justify-center group-hover:border-[#ff00aa]/50 transition-all duration-500">
                   <Instagram size={16} className="text-[#ff00aa]/60 group-hover:text-[#ff00aa]" />
                 </div>
                 <span className="font-[Rajdhani] text-white/40 group-hover:text-white/70 transition-colors">
-                  @ai.creator.studio
+                  @ramzena_ai_creator
                 </span>
               </a>
               <a
-                href="#"
+                href="https://t.me/uliana_sobolevs_avtorka"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-4 group"
-                onClick={(e) => { e.preventDefault(); toast("Feature coming soon"); }}
               >
                 <div className="w-10 h-10 border border-[#00f0ff]/20 flex items-center justify-center group-hover:border-[#00f0ff]/50 transition-all duration-500">
                   <MessageCircle size={16} className="text-[#00f0ff]/60 group-hover:text-[#00f0ff]" />
                 </div>
                 <span className="font-[Rajdhani] text-white/40 group-hover:text-white/70 transition-colors">
-                  Telegram
+                  uliana_sobolevs_avtorka
                 </span>
               </a>
             </div>
