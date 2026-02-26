@@ -151,7 +151,7 @@ export const cosmeticsPhotos: PhotoItem[] = [
   { id: "c98", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/rhFpGGvAJPhkbizt.jpg" },
 ];
 
-export const videos: VideoItem[] = [
+export const animationVideos: VideoItem[] = [
   {
     id: "v1",
     url: "https://private-us-east-1.manuscdn.com/user_upload_by_module/session_file/310519663370604204/tNIWErxGuTAmKSKG.mov?Expires=1803642739&Signature=aivxwTBLEXIorGsvCOPmHE8W4NIWUFPjxxo~WseLLItRtUqyARSYoAkWJNhW1GCFDBstQo1Mrc0D3P4cpox7t~GbtTU~jD81ol1YU2TxeEl9zkhfXGpWQZfE9ufg-F2p9lxmEGbS5CnZvJK4o7gf442Ad9jhjYs~9rIgg~tOKu8M1807qB8mnyTAUWsN0OJ~5irAYMDM7Yxi45HPuNXmAm3YC0B2bCZfnPl2MDpMkW6yk0l3nsJqEoUD5BtwL7PRFLP03KJPyVjLZTQ94R~CACzL64d2XIiKv93BghTrQIPM0n4HqCiHcVjpPh1Lr8JzGwPzQDXieL3-uCZOCQ4Ddg__&Key-Pair-Id=K2HSFNDJXOU9YS",
@@ -169,10 +169,33 @@ export const videos: VideoItem[] = [
   }
 ];
 
-export type Category = "food" | "cosmetics" | "animation";
-
-export const categories: { id: Category; label: string; count: number }[] = [
-  { id: "food", label: "Food & Beverages", count: foodPhotos.length },
-  { id: "cosmetics", label: "Cosmetics & Perfumery", count: cosmeticsPhotos.length },
-  { id: "animation", label: "Animation", count: videos.length },
+export const documentaryVideos: VideoItem[] = [
+  {
+    id: "d1",
+    url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/LGXHYdmhSZIiNXfc.mp4",
+    title: "Documentary Piece"
+  }
 ];
+
+// Category type — easily extensible for future categories (Series, UGC, Advertising, etc.)
+export type Category = "food" | "cosmetics" | "animation" | "documentary";
+
+export interface CategoryConfig {
+  id: Category;
+  label: string;
+  type: "photos" | "videos"; // determines rendering method
+  count: number;
+  data: PhotoItem[] | VideoItem[];
+}
+
+export const categories: CategoryConfig[] = [
+  { id: "food", label: "Food & Beverages", type: "photos", count: foodPhotos.length, data: foodPhotos },
+  { id: "cosmetics", label: "Cosmetics & Perfumery", type: "photos", count: cosmeticsPhotos.length, data: cosmeticsPhotos },
+  { id: "animation", label: "Animation", type: "videos", count: animationVideos.length, data: animationVideos },
+  { id: "documentary", label: "Documentary", type: "videos", count: documentaryVideos.length, data: documentaryVideos },
+];
+
+// Future categories (ready to be enabled):
+// { id: "series", label: "Series", type: "videos", count: seriesVideos.length, data: seriesVideos },
+// { id: "ugc", label: "UGC", type: "videos", count: ugcVideos.length, data: ugcVideos },
+// { id: "advertising", label: "Advertising", type: "videos", count: advertisingVideos.length, data: advertisingVideos },

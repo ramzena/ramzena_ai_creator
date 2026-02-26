@@ -1,7 +1,7 @@
 // Design: Neo-Tokyo Cyberpunk — masonry grid, neon tab bar, glow hover, lightbox, video player
 import { useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { foodPhotos, cosmeticsPhotos, videos, categories, type Category } from "@/data/portfolio";
+import { categories, type Category, type PhotoItem, type VideoItem } from "@/data/portfolio";
 import Lightbox from "./Lightbox";
 
 const ITEMS_PER_PAGE = 12;
@@ -12,14 +12,12 @@ export default function PortfolioSection() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
-  const currentPhotos = useMemo(() => {
-    if (activeTab === "food") return foodPhotos;
-    if (activeTab === "cosmetics") return cosmeticsPhotos;
-    return [];
-  }, [activeTab]);
-
-  const visiblePhotos = useMemo(() => currentPhotos.slice(0, visibleCount), [currentPhotos, visibleCount]);
-  const hasMore = visibleCount < currentPhotos.length;
+  const currentCategory = useMemo(() => categories.find(c => c.id === activeTab), [activeTab]);
+  const currentData = useMemo(() => (currentCategory?.data || []) as (PhotoItem | VideoItem)[], [currentCategory]);
+  const isVideoCategory = currentCategory?.type === "videos";
+  
+  const visibleItems = useMemo(() => currentData.slice(0, visibleCount), [currentData, visibleCount]);
+  const hasMore = visibleCount < currentData.length;
 
   const handleTabChange = (tab: Category) => {
     setActiveTab(tab);
@@ -32,12 +30,12 @@ export default function PortfolioSection() {
   }, []);
 
   const nextImage = useCallback(() => {
-    setLightboxIndex((prev) => (prev + 1) % currentPhotos.length);
-  }, [currentPhotos.length]);
+    setLightboxIndex((prev) => (prev + 1) % currentData.length);
+  }, [currentData.length]);
 
   const prevImage = useCallback(() => {
-    setLightboxIndex((prev) => (prev - 1 + currentPhotos.length) % currentPhotos.length);
-  }, [currentPhotos.length]);
+    setLightboxIndex((prev) => (prev - 1 + currentData.length) % currentData.length);
+  }, [currentData.length]);
 
   return (
     <section id="portfolio" className="relative py-20 md:py-32">
@@ -148,7 +146,7 @@ export default function PortfolioSection() {
             >
               {/* Masonry Grid */}
               <div className="masonry-grid">
-                {visiblePhotos.map((photo, i) => (
+                {visibleItems.map((photo, i) => (
                   <motion.div
                     key={photo.id}
                     initial={{ opacity: 0, scale: 0.95 }}
@@ -198,7 +196,7 @@ export default function PortfolioSection() {
                   >
                     LOAD MORE
                     <span className="ml-3 font-[Rajdhani] text-xs text-white/30">
-                      ({visibleCount}/{currentPhotos.length})
+                      ({visibleCount}/{currentData.length})
                     </span>
                     <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-[#00f0ff] group-hover:w-full transition-all duration-700" />
                   </button>
