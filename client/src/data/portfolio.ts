@@ -177,8 +177,16 @@ export const documentaryVideos: VideoItem[] = [
   }
 ];
 
+export const seriesVideos: VideoItem[] = [
+  {
+    id: "s1",
+    url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/TWTbOqxYkszWklGb.mp4",
+    title: "Series Episode"
+  }
+];
+
 // Category type — easily extensible for future categories (Series, UGC, Advertising, etc.)
-export type Category = "food" | "cosmetics" | "animation" | "documentary";
+export type Category = "food" | "cosmetics" | "animation" | "documentary" | "series";
 
 export interface CategoryConfig {
   id: Category;
@@ -193,9 +201,10 @@ export const categories: CategoryConfig[] = [
   { id: "cosmetics", label: "Cosmetics & Perfumery", type: "photos", count: cosmeticsPhotos.length, data: cosmeticsPhotos },
   { id: "animation", label: "Animation", type: "videos", count: animationVideos.length, data: animationVideos },
   { id: "documentary", label: "Documentary", type: "videos", count: documentaryVideos.length, data: documentaryVideos },
+  { id: "series", label: "Series", type: "videos", count: seriesVideos.length, data: seriesVideos },
 ];
 
 // Future categories (ready to be enabled):
-// { id: "series", label: "Series", type: "videos", count: seriesVideos.length, data: seriesVideos },
+
 // { id: "ugc", label: "UGC", type: "videos", count: ugcVideos.length, data: ugcVideos },
 // { id: "advertising", label: "Advertising", type: "videos", count: advertisingVideos.length, data: advertisingVideos },
