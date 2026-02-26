@@ -96,54 +96,58 @@ export default function PortfolioSection() {
       {/* Content */}
       <div className="container">
         <AnimatePresence mode="wait">
-          {activeTab === "animation" ? (
-            <motion.div
-              key="animation"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6"
-            >
-              {videos.map((video, i) => (
-                <motion.div
-                  key={video.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: i * 0.15 }}
-                  className="group relative border border-[#ff00aa]/20 bg-[#0a0a12] overflow-hidden hover:border-[#ff00aa]/50 transition-all duration-500"
-                  style={{
-                    boxShadow: "0 0 0px rgba(255,0,170,0)"
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(255,0,170,0.15), 0 0 40px rgba(255,0,170,0.05)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.boxShadow = "0 0 0px rgba(255,0,170,0)";
-                  }}
-                >
-                  <video
-                    src={video.url}
-                    controls
-                    playsInline
-                    preload="metadata"
-                    className="w-full aspect-video object-cover"
-                    style={{ backgroundColor: "#0a0a12" }}
-                  />
-                  <div className="p-4 border-t border-[#ff00aa]/10">
-                    <h3 className="font-[Orbitron] text-xs tracking-[0.15em] text-[#ff00aa]/80">{video.title}</h3>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          ) : (
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-            >
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+          >
+            {isVideoCategory ? (
+              // Video Grid
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {visibleItems.map((item, i) => {
+                  const video = item as VideoItem;
+                  return (
+                    <motion.div
+                      key={video.id}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: i * 0.15 }}
+                      className="group relative border border-[#ff00aa]/20 bg-[#0a0a12] overflow-hidden hover:border-[#ff00aa]/50 transition-all duration-500"
+                      style={{
+                        boxShadow: "0 0 0px rgba(255,0,170,0)"
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.boxShadow = "0 0 20px rgba(255,0,170,0.15), 0 0 40px rgba(255,0,170,0.05)";
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.boxShadow = "0 0 0px rgba(255,0,170,0)";
+                      }}
+                    >
+                      <video
+                        src={video.url}
+                        controls
+                        playsInline
+                        preload="metadata"
+                        className="w-full aspect-video object-cover"
+                        style={{ backgroundColor: "#0a0a12" }}
+                      />
+                      <div className="p-4 border-t border-[#ff00aa]/10">
+                        <h3 className="font-[Orbitron] text-xs tracking-[0.15em] text-[#ff00aa]/80">{video.title}</h3>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            ) : (
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+              >
               {/* Masonry Grid */}
               <div className="masonry-grid">
                 {visibleItems.map((photo, i) => (
@@ -202,20 +206,23 @@ export default function PortfolioSection() {
                   </button>
                 </motion.div>
               )}
-            </motion.div>
-          )}
+              </motion.div>
+            )}
+          </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Lightbox */}
-      <Lightbox
-        images={currentPhotos}
-        currentIndex={lightboxIndex}
-        isOpen={lightboxOpen}
-        onClose={() => setLightboxOpen(false)}
-        onNext={nextImage}
-        onPrev={prevImage}
-      />
+      {/* Lightbox — only show for photo categories */}
+      {!isVideoCategory && (
+        <Lightbox
+          images={currentData as PhotoItem[]}
+          currentIndex={lightboxIndex}
+          isOpen={lightboxOpen}
+          onClose={() => setLightboxOpen(false)}
+          onNext={nextImage}
+          onPrev={prevImage}
+        />
+      )}
     </section>
   );
 }
