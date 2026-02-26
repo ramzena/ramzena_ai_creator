@@ -182,6 +182,11 @@ export const seriesVideos: VideoItem[] = [
     id: "s1",
     url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/TWTbOqxYkszWklGb.mp4",
     title: "Series Episode"
+  },
+  {
+    id: "s2",
+    url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/fVdCvJXsPtnCvFgo.mp4",
+    title: "Series Episode 2"
   }
 ];
 
