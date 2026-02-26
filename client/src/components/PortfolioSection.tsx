@@ -15,6 +15,7 @@ export default function PortfolioSection() {
   const currentCategory = useMemo(() => categories.find(c => c.id === activeTab), [activeTab]);
   const currentData = useMemo(() => (currentCategory?.data || []) as (PhotoItem | VideoItem)[], [currentCategory]);
   const isVideoCategory = currentCategory?.type === "videos";
+  const isMixedCategory = currentCategory?.type === "mixed";
   
   const visibleItems = useMemo(() => currentData.slice(0, visibleCount), [currentData, visibleCount]);
   const hasMore = visibleCount < currentData.length;
@@ -103,10 +104,50 @@ export default function PortfolioSection() {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
           >
-            {isVideoCategory ? (
-              // Video Grid
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {isVideoCategory || isMixedCategory ? (
+              // Video Grid (or Mixed Grid)
+              <div className={isMixedCategory ? "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4" : "grid grid-cols-1 md:grid-cols-3 gap-6"}>
                 {visibleItems.map((item, i) => {
+                  // Check if this is a video (has 'title' property) or photo
+                  const isVideo = "title" in item;
+                  
+                  // In mixed mode, render photos as small thumbnails and videos as larger cards
+                  if (!isVideo && isMixedCategory) {
+                    const photo = item as PhotoItem;
+                    return (
+                      <motion.div
+                        key={photo.id}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.4, delay: Math.min(i * 0.03, 0.5) }}
+                        className="group relative cursor-pointer border border-[#00f0ff]/10 overflow-hidden bg-[#0a0a12] hover:border-[#00f0ff]/40 transition-all duration-500"
+                        onClick={() => openLightbox(i)}
+                        style={{
+                          boxShadow: "0 0 0px rgba(0,240,255,0)"
+                        }}
+                        onMouseEnter={(e) => {
+                          (e.currentTarget as HTMLElement).style.boxShadow = "0 0 15px rgba(0,240,255,0.12), 0 0 30px rgba(0,240,255,0.04)";
+                        }}
+                        onMouseLeave={(e) => {
+                          (e.currentTarget as HTMLElement).style.boxShadow = "0 0 0px rgba(0,240,255,0)";
+                        }}
+                      >
+                        <img
+                          src={photo.url}
+                          alt={`Portfolio item ${i + 1}`}
+                          className="w-full h-auto block transition-transform duration-700 group-hover:scale-105 aspect-square object-cover"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#050508]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-3">
+                          <span className="font-[Orbitron] text-[9px] tracking-[0.2em] text-[#00f0ff]/70">
+                            VIEW
+                          </span>
+                        </div>
+                      </motion.div>
+                    );
+                  }
+                  
+                  // Render video
                   const video = item as VideoItem;
                   return (
                     <motion.div

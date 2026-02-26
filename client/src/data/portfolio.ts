@@ -185,13 +185,34 @@ export const seriesVideos: VideoItem[] = [
   }
 ];
 
+export const ugcVideos: VideoItem[] = [
+  { id: "u1", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/sNpbwWeEJlVFYcvP.mp4", title: "UGC Video 1" },
+  { id: "u2", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/vCbyzLvTNuuGIJHX.mp4", title: "UGC Video 2" },
+  { id: "u3", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/SdZKmVKoghrOMByo.mp4", title: "UGC Video 3" },
+  { id: "u4", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/VmcqOoMuHQtckDwP.mp4", title: "UGC Video 4" },
+  { id: "u5", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/EDlFMohiRaNrQJZq.mp4", title: "UGC Video 5" },
+  { id: "u6", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/yZqUZdmMqrTewNWU.mp4", title: "UGC Video 6" },
+  { id: "u7", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/kRczkVwxKFqZaEYO.mp4", title: "UGC Video 7" },
+  { id: "u8", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/DVpMXxNhSenFuczr.mp4", title: "UGC Video 8" },
+  { id: "u9", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/tKsWANlPZLKexOzY.mp4", title: "UGC Video 9" },
+  { id: "u10", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/URVnzRINZjAENmQM.mp4", title: "UGC Video 10" },
+];
+
+export const ugcPhotos: PhotoItem[] = [
+  { id: "up1", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/rlhAYNoHBymXlpVC.jpeg" },
+  { id: "up2", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/dHVIEdHEfWoJulxf.jpeg" },
+  { id: "up3", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/vkYoANwcINCAPEkk.jpeg" },
+  { id: "up4", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/nixTDESScLcCHDrK.jpeg" },
+  { id: "up5", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/JRznkXOTRICwrlKI.jpeg" },
+];
+
 // Category type — easily extensible for future categories (Series, UGC, Advertising, etc.)
-export type Category = "food" | "cosmetics" | "animation" | "documentary" | "series";
+export type Category = "food" | "cosmetics" | "animation" | "documentary" | "series" | "ugc";
 
 export interface CategoryConfig {
   id: Category;
   label: string;
-  type: "photos" | "videos"; // determines rendering method
+  type: "photos" | "videos" | "mixed"; // determines rendering method
   count: number;
   data: PhotoItem[] | VideoItem[];
 }
@@ -202,9 +223,10 @@ export const categories: CategoryConfig[] = [
   { id: "animation", label: "Animation", type: "videos", count: animationVideos.length, data: animationVideos },
   { id: "documentary", label: "Documentary", type: "videos", count: documentaryVideos.length, data: documentaryVideos },
   { id: "series", label: "Series", type: "videos", count: seriesVideos.length, data: seriesVideos },
+  { id: "ugc", label: "UGC", type: "mixed", count: ugcPhotos.length + ugcVideos.length, data: [...ugcPhotos, ...ugcVideos] },
 ];
 
 // Future categories (ready to be enabled):
 
-// { id: "ugc", label: "UGC", type: "videos", count: ugcVideos.length, data: ugcVideos },
+
 // { id: "advertising", label: "Advertising", type: "videos", count: advertisingVideos.length, data: advertisingVideos },
