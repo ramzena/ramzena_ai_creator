@@ -206,8 +206,15 @@ export const ugcPhotos: PhotoItem[] = [
   { id: "up5", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/JRznkXOTRICwrlKI.jpeg" },
 ];
 
+export const advertisingVideos: VideoItem[] = [
+  { id: "a1", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/RuSnYvsxRqRQBeHZ.mp4", title: "Ad Campaign 1" },
+  { id: "a2", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/YiyCtlmUIixppIyK.mp4", title: "Ad Campaign 2" },
+  { id: "a3", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/bQArYzPUJqLmBTQV.mp4", title: "Ad Campaign 3" },
+  { id: "a4", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/CIAclMUhuldXknVT.mp4", title: "Ad Campaign 4" },
+];
+
 // Category type — easily extensible for future categories (Series, UGC, Advertising, etc.)
-export type Category = "food" | "cosmetics" | "animation" | "documentary" | "series" | "ugc";
+export type Category = "food" | "cosmetics" | "animation" | "documentary" | "series" | "ugc" | "advertising";
 
 export interface CategoryConfig {
   id: Category;
@@ -224,9 +231,10 @@ export const categories: CategoryConfig[] = [
   { id: "documentary", label: "Documentary", type: "videos", count: documentaryVideos.length, data: documentaryVideos },
   { id: "series", label: "Series", type: "videos", count: seriesVideos.length, data: seriesVideos },
   { id: "ugc", label: "UGC", type: "mixed", count: ugcPhotos.length + ugcVideos.length, data: [...ugcPhotos, ...ugcVideos] },
+  { id: "advertising", label: "Advertising", type: "videos", count: advertisingVideos.length, data: advertisingVideos },
 ];
 
 // Future categories (ready to be enabled):
 
 
-// { id: "advertising", label: "Advertising", type: "videos", count: advertisingVideos.length, data: advertisingVideos },
+
