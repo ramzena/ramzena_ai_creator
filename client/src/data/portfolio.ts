@@ -174,6 +174,11 @@ export const documentaryVideos: VideoItem[] = [
     id: "d1",
     url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/LGXHYdmhSZIiNXfc.mp4",
     title: "Documentary Piece"
+  },
+  {
+    id: "d2",
+    url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/eFhyPljpVIBDNBZV.mp4",
+    title: "Documentary Part 2"
   }
 ];
 
