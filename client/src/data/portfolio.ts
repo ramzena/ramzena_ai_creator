@@ -216,6 +216,7 @@ export const advertisingVideos: VideoItem[] = [
   { id: "a2", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/YiyCtlmUIixppIyK.mp4", title: "Ad Campaign 2" },
   { id: "a3", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/bQArYzPUJqLmBTQV.mp4", title: "Ad Campaign 3" },
   { id: "a4", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/CIAclMUhuldXknVT.mp4", title: "Ad Campaign 4" },
+  { id: "a5", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/OXzrMlnrgWJWlinE.mp4", title: "Ad Campaign 5" },
 ];
 
 // Category type — easily extensible for future categories (Series, UGC, Advertising, etc.)
