@@ -201,6 +201,7 @@ export const ugcVideos: VideoItem[] = [
   { id: "u8", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/DVpMXxNhSenFuczr.mp4", title: "UGC Video 8" },
   { id: "u9", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/tKsWANlPZLKexOzY.mp4", title: "UGC Video 9" },
   { id: "u10", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/URVnzRINZjAENmQM.mp4", title: "UGC Video 10" },
+  { id: "u11", url: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663370604204/TVsYQeZkiWqAReNy.mp4", title: "UGC Video 11" },
 ];
 
 export const ugcPhotos: PhotoItem[] = [
